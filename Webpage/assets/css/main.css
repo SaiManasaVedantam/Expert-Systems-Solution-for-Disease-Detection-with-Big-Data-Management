@@ -56,24 +56,25 @@ footer, header, hgroup, menu, nav, section {
 	padding-top: 1em !IMPORTANT;
 }
 
-.count1 {
+.count4 {
 	background: #FFA590;
 }
 
-.count2 {
+.count3 {
 	background: #FF9076;
 }
 
-.count3 {
+.count2 {
 	background: #FD8063;
 }
 
-.count4 {
+.count1 {
 	background: #FB785B;
 }
 
 .arrange-diseases {
 	display : flex;
+	flex-wrap: wrap;
 }
 
 .disease-margin {
