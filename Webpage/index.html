@@ -46,7 +46,7 @@
 										{% set sorted_disease_dict = {"Disease1" : 4, "Disease2" : 4, "Disease3" : 4, "Disease4" : 4, "Disease5" : 3, "Disease6" : 3, "Disease7" : 3, "Disease8" : 3, "Disease9" : 3, "Disease10" : 2, "Disease11" : 2, "Disease12" : 2, "Disease13" : 1, "Disease14" : 1 } %}	
 										{% for key in sorted_disease_dict.keys() %}
 											{% set style = "count" + sorted_disease_dict[key]}
-											<p id="rounded-display" class="style disease-margin"> {{ sorted_disease_dict[key] }} </p>
+											<p id="rounded-display" class="style disease-margin"> {{ key }} </p>
 										{% endfor %}
 
 										View sample display below
