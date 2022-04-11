@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
+
+<script src="connect.js"></script>
+
+<script type="text/javascript">
+	$( document ).ready(function() {
+		console.log(document.cookie)
+		console.log("Hi")
+		$('select').selectpicker();
+		alert("Hey");
+		alert(document.cookie);
+	  });
+	</script>
+
+
+	<head>
+		<title>Swift Diagnosis</title>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="../static/main.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+		<!-- Scripts -->
+		<script src="../static/jquery.min.js"></script>
+		<script src="../static/browser.min.js"></script>
+		<script src="../static/breakpoints.min.js"></script>
+		<script src="../static/js/util.js"></script>
+		<script src="../static/main.js"></script>
+	</head>
+
+
+	<body class="is-preload small-padding-top">
+
+		<div>
+			<!-- <img src="images/logo.jpg" class="logo-img"/ style="display: flex;"> -->
+			<h2 class="swift-title"> SWIFT DIAGNOSIS </h2>
+			<header> <p class="swift-tag"> Know early, Cure early </p> </header>
+			<hr class="medium-bottom-margin margin-top-8">
+		</div>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- List of diseases -->
+							<article class="post">
+
+								<header class="small-margin-bottom">
+									<div class="title">
+										<h2> List of possible diseases based on your symptoms </h2>
+									</div>
+								</header>
+
+								<div class="arrange-diseases">	
+
+									<p id="rounded-display" class="count4 disease-margin"> Disease1 </p>
+									<p id="rounded-display" class="count4 disease-margin"> Disease2 </p>
+									<p id="rounded-display" class="count4 disease-margin"> Disease3 </p>
+									<p id="rounded-display" class="count4 disease-margin"> Disease4 </p>
+									<p id="rounded-display" class="count3 disease-margin"> Disease5 </p>
+									<p id="rounded-display" class="count3 disease-margin"> Disease6 </p>
+									<p id="rounded-display" class="count3 disease-margin"> Disease7 </p>
+									<p id="rounded-display" class="count3 disease-margin"> Disease8 </p>
+									<p id="rounded-display" class="count2 disease-margin"> Disease9 </p>
+									<p id="rounded-display" class="count2 disease-margin"> Disease10 </p>
+									<p id="rounded-display" class="count2 disease-margin"> Disease11 </p>
+									<p id="rounded-display" class="count1 disease-margin"> Disease12 </p>
+									<p id="rounded-display" class="count1 disease-margin"> Disease13 </p>
+									<p id="rounded-display" class="count1 disease-margin"> Disease14 </p>
+
+								</div>
+
+							</article>
+
+							<!-- Visualization -->
+							<article class="post">
+
+								<header>
+									<div class="title">
+										<h2> Graphs come here </h2>
+									</div>
+								</header>
+
+							</article>
+
+					</div>
+
+				<!-- Sidebar -->
+					<section id="sidebar">
+
+						<!-- Dropdown -->
+							<section>
+								<div class="mini-posts">
+										<article class="mini-post">
+											<div class="arrange-diseases small-margin-bottom small-left-margin">	
+												<div class="medium-right-margin">
+													<span class="flex-display">		
+														<p id="rounded-display" class="count1 disease-margin">  </p>
+														<span class="margin-top-8"> 0-25% likely </span>
+													</span>
+
+													<span class="flex-display">		
+														<p id="rounded-display" class="count2 disease-margin">  </p>
+														<span class="margin-top-8"> 26-50% likely </span>
+													</span>
+												</div>
+
+												<div>
+													<span class="flex-display">		
+														<p id="rounded-display" class="count3 disease-margin">  </p>
+														<span class="margin-top-8"> 51-75% likely </span>
+													</span>
+
+													<span class="flex-display">		
+														<p id="rounded-display" class="count4 disease-margin">  </p>
+														<span class="margin-top-8"> 76-100% likely </span>
+													</span>
+												</div>
+
+										</div>
+
+											<hr class="custom-margin small-margin-bottom">
+
+											<header>
+												<div class="title">
+													<h3 class="small-margin-top"> Legend </h3>
+												</div>
+											</header>
+
+										</article>
+
+										<article class="mini-post">
+				
+												<div class="row">
+													<div class="col-sm-3">
+													  <div class="form-group">
+												<select class="selectpicker show-tick" multiple data-live-search="true" data-max-options="7" 
+												multiple title="Select your sympotoms" data-width="auto">
+												{% for data in object_list %}
+												<option>
+													{{data.Name}}
+												</option>
+												{% endfor %}
+													<!-- <option>Mustard</option>
+													<option>Ketchup</option>
+													<option>Barbecue</option> -->
+												  </select> 
+												</div>
+												</div>
+												</div>
+											
+											
+										</article>
+
+								</div>
+							</section>
+
+					</section>
+
+			</div>
+
+	</body>
+
+
+</html>
