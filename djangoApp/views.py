@@ -3,13 +3,13 @@ from django.http import HttpResponse
 
 from django.views.generic import TemplateView,ListView
 
-from djangoApp.models import Symptoms
+from djangoApp.models import *
 
 
 class IndexView(ListView):
     template_name = "index.html"
     def get_queryset(self):
-        result=Symptoms.objects.all()
+        result=Diseases_Symptoms.objects.all()
         return result
 
 

@@ -1,11 +1,12 @@
 from django.db import models
 
 
-class Symptoms(models.Model):
-    Name = models.CharField(max_length=25)
+class Diseases_Symptoms(models.Model):
+    Disease = models.CharField(max_length=50)
+    Symptom = models.CharField(max_length=50)
     # pub_date = models.DateTimeField('date published')
     def __str__(self):
-		    return (str(self.Name))
+		    return (str(self.Symptom))
 
 
 # class Choice(models.Model):

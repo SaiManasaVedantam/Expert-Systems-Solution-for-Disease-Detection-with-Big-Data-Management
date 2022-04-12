@@ -33,3 +33,12 @@ Import —> Run the swiftdiagnosis.sql file (Do this only once)
 python manage.py runserver
 To stop, use Ctrl+C
 localhost:8000
+--------------------------------------------------------
+Descriptions of file in "djangoApp" folder:
+
+1) urls.py: Provides the mapping of our apps urls to their respective python views(methods).
+2) views.py: Provides the mapping of the logic behind every screen of the application. This is mapped from the urls.py      folder.
+3) models.py: Provides the mapping to our SQL database.
+
+
+The Template folder contains the webpage html.
