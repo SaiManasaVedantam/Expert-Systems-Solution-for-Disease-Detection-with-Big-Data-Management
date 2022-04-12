@@ -10,20 +10,20 @@ The key idea is to fully utilize the potential of Big Data Management & Analytic
 ## Instructions to set up Django
 
 #### For Mac:
-Navigate to env —> cd env
-Activate the virtual environment —> Source env/bin/activate —> Before the username, you should see (env)
-Now back to project folder —> cd ..
+1. Navigate to env —> cd env
+2. Activate the virtual environment —> Source env/bin/activate —> Before the username, you should see (env)
+3. Now back to project folder —> cd ..
 
 #### For Windows:
-Navigate to env/Scripts —> cd env/Scripts
-Activate the virtual environment —> activate —> Before the username, you should see (env)
-Now back to project folder —> cd ..    cd ..
+1. Navigate to env/Scripts —> cd env/Scripts
+2. Activate the virtual environment —> activate —> Before the username, you should see (env)
+3. Now back to project folder —> cd ..    cd ..
 
 #### Common Installations:
 Do the following installations only after the virtual environment is activated
-pip install pymysql
-pip install Django
-Download & install xampp
+1. pip install pymysql
+2. pip install Django
+3. Download & install xampp
 
 #### To run the project:
 1. Start xampp server
