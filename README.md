@@ -8,11 +8,28 @@ The key idea is to fully utilize the potential of Big Data Management & Analytic
 
 
 --------------------------------------------------
-Steps to run project:
+Django Setup
 
-1) Run - cd env\Scripts\
-2) Run - activate
-3) Run - cd .. (i.e navigate to root folder)
-4) Run pip install pymysql
-5) Change your code editor's python interpreter to the one located in the project folder in ".\env\Scripts\python.exe" (In case of VSCODE this is done using ctrl+shift+p)
-6) Run - python manage.py runserver
+For Mac:
+Navigate to env —> cd env
+Activate the virtual environment —> Source env/bin/activate —> Before the username, you should see (env)
+Now back to project folder —> cd ..
+
+For Windows:
+Navigate to env/Scripts —> cd env/Scripts
+Activate the virtual environment —> activate —> Before the username, you should see (env)
+Now back to project folder —> cd ..    cd ..
+
+Common Installations:
+Do the following installations only after the virtual environment is activated
+pip install pymysql
+pip install Django
+Download & install xampp
+
+To run the project:
+Start xampp server
+Go to http://localhost/phpmyadmin/
+Import —> Run the swiftdiagnosis.sql file (Do this only once)
+python manage.py runserver
+To stop, use Ctrl+C
+localhost:8000
