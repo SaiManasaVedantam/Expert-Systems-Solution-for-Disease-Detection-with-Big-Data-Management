@@ -5,3 +5,40 @@ The key idea is to fully utilize the potential of Big Data Management & Analytic
 - Natural Language Processing : Handles knowledge extraction & feature generation.
 - Machine Learning : Building models based on the data.
 - Big Data Management & Data Analytics : Processing huge data & Visualizing the inferences.
+
+
+--------------------------------------------------
+Django Setup
+
+For Mac:
+Navigate to env —> cd env
+Activate the virtual environment —> Source env/bin/activate —> Before the username, you should see (env)
+Now back to project folder —> cd ..
+
+For Windows:
+Navigate to env/Scripts —> cd env/Scripts
+Activate the virtual environment —> activate —> Before the username, you should see (env)
+Now back to project folder —> cd ..    cd ..
+
+Common Installations:
+Do the following installations only after the virtual environment is activated
+pip install pymysql
+pip install Django
+Download & install xampp
+
+To run the project:
+Start xampp server
+Go to http://localhost/phpmyadmin/
+Import —> Run the swiftdiagnosis.sql file (Do this only once)
+python manage.py runserver
+To stop, use Ctrl+C
+localhost:8000
+--------------------------------------------------------
+Descriptions of file in "djangoApp" folder:
+
+1) urls.py: Provides the mapping of our apps urls to their respective python views(methods).
+2) views.py: Provides the mapping of the logic behind every screen of the application. This is mapped from the urls.py      folder.
+3) models.py: Provides the mapping to our SQL database.
+
+
+The Template folder contains the webpage html.
