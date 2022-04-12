@@ -5,3 +5,14 @@ The key idea is to fully utilize the potential of Big Data Management & Analytic
 - Natural Language Processing : Handles knowledge extraction & feature generation.
 - Machine Learning : Building models based on the data.
 - Big Data Management & Data Analytics : Processing huge data & Visualizing the inferences.
+
+
+--------------------------------------------------
+Steps to run project:
+
+1) Run - cd env\Scripts\
+2) Run - activate
+3) Run - cd .. (i.e navigate to root folder)
+4) Run pip install pymysql
+5) Change your code editor's python interpreter to the one located in the project folder in ".\env\Scripts\python.exe" (In case of VSCODE this is done using ctrl+shift+p)
+6) Run - python manage.py runserver
