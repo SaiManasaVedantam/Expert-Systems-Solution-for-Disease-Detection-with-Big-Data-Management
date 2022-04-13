@@ -30,6 +30,59 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+.max-height-set {
+	height: 15em;
+}
+
+.bootstrap-select .btn {
+  border-style: solid;
+  border-left-width: 3px;
+  border-left-color: #f17f66;
+  background-color: white !IMPORTANT;
+  font-weight: 150;
+  padding: 12px 20px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.bootstrap-select .dropdown-toggle .filter-option {
+	height: 50%;
+}
+
+.option-width {
+	width: 327px !IMPORTANT;
+}
+
+.option-color {
+	color: #3c3b3b;
+}
+
+.dropdown-menu {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.inner, .show{
+	max-height:  120px !IMPORTANT;
+}
+
+.title-padding-set {
+	padding-top: 23px !IMPORTANT;
+	padding-bottom:  16px !IMPORTANT;
+}
+
+#rounded-display2 {
+  border-radius: 40px;
+  background-color: #faa18c;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 16px;
+  margin-left: 28%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
 #rounded-display {
   border-radius: 25px;
   padding: 12px;
@@ -42,7 +95,7 @@ footer, header, hgroup, menu, nav, section {
 	font-size: 3.5em; 
 	font-weight: 900; 
 	text-align: center; 
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 
 .swift-tag {
@@ -81,12 +134,25 @@ footer, header, hgroup, menu, nav, section {
 	margin: 10px;
 }
 
+.med-bottom-margin {
+	margin-bottom: 15px !IMPORTANT;
+}
+
+.med2-bottom-margin {
+	margin-bottom: 30px !IMPORTANT;
+}
+
 .small-margin-bottom {
 	margin-bottom: 10px !IMPORTANT;
 }
 
+.least-rt-lt-margin {
+	margin-right: 0.5em;
+	margin-left: 0.7em;
+}
+
 .medium-bottom-margin {
-	margin-bottom:  2em;
+	margin-bottom:  1em;
 }
 
 .small-left-margin {
