@@ -30,6 +30,13 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
+.busy{
+	font-size: 15px;
+	font-family: "Raleway", Helvetica, sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 0.25em;
+}
+
 .max-height-set {
 	height: 15em;
 }
