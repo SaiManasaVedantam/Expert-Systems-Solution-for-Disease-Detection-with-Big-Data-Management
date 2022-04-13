@@ -10,28 +10,29 @@ The key idea is to fully utilize the potential of Big Data Management & Analytic
 ## Instructions to set up Django
 
 #### For Mac:
-Navigate to env —> cd env
-Activate the virtual environment —> Source env/bin/activate —> Before the username, you should see (env)
-Now back to project folder —> cd ..
+1. Navigate to env —> cd env
+2. Activate the virtual environment —> source env/bin/activate —> Before the username, you should see (env)
+3. Now back to project folder —> cd ..
 
 #### For Windows:
-Navigate to env/Scripts —> cd env/Scripts
-Activate the virtual environment —> activate —> Before the username, you should see (env)
-Now back to project folder —> cd ..    cd ..
+1. Navigate to env/Scripts —> cd env/Scripts
+2. Activate the virtual environment —> activate —> Before the username, you should see (env)
+3. Now back to project folder —> cd ..    cd ..
 
 #### Common Installations:
 Do the following installations only after the virtual environment is activated
-pip install pymysql
-pip install Django
-Download & install xampp
+1. pip install pymysql
+2. pip install Django
+3. Download & install xampp
 
 #### To run the project:
 1. Start xampp server
 2. Go to http://localhost/phpmyadmin/
 3. Import —> Run the swiftdiagnosis.sql file (Do this only once)
-4. python manage.py runserver
-5. To stop, use Ctrl+C
-6. http://localhost:8000 to view the UI up & running
+4. Navigate to project folder & then --> python -m venv env (For Mac users)
+5. python manage.py runserver
+6. To stop, use Ctrl+C
+7. http://localhost:8000 to view the UI up & running
 
 ## About files in "djangoApp" folder
 1. urls.py: Provides the mapping of our apps urls to their respective python views(methods).
