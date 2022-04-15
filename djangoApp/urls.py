@@ -4,5 +4,6 @@ from . import views
 from .views import *
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='IndexView'),
+    path('', views.get_queryset, name='home'),
+    path('result/', views.result, name='result'),
 ]

@@ -66,46 +66,37 @@
 
 								<header class="small-margin-bottom">
 									<div class="title title-padding-set">
+										{% if show %}
+										<h2>View Results Here</h2>
+										{% endif %}
+
+										{% if back %}
 										<h2> List of possible diseases based on your symptoms </h2>
+										{% endif %}
+
 									</div>
 								</header>
 
 								<!-- Activated onsubmit & before getting results -->
-								<div class="d-flex busy flex-column align-items-center justify-content-center">
+								<!-- <div class="d-flex busy flex-column align-items-center justify-content-center">
+									{% if disable %}
    									<div class="row">
 								       <div class="spinner-border" role="status">
 								           <span class="sr-only">Loading...</span>
 								       </div>
 								    </div>
-
+									
 								    <div class="row">
 								      <strong>Processing symptoms...</strong>
 								    </div>
-								</div>
+									{% endif %}
+								</div> -->
 
 								<!-- Display generated results -->
-								<div class="arrange-diseases">	
-									<!-- Assuming data is received in sorted_dict as {Disease1: count1...} 
-									{% for (key, cnt) in sorted_dict.items() %}
-										{% set count_css = "count" + {{cnt}} -%}
-										<p id="rounded-display" class="{{count_css}} disease-margin"> {{sorted_dict[key]}} </p>
+								<div class="arrange-diseases">
+									{% for val,cnt in final_dict.items %}
+										<p id="rounded-display" class="{{cnt}} disease-margin"> {{val}} </p>
 									{% endfor %}
-									-->
-									<p id="rounded-display" class="count4 disease-margin"> Disease1 </p>
-									<p id="rounded-display" class="count4 disease-margin"> Disease2 </p>
-									<p id="rounded-display" class="count4 disease-margin"> Disease3 </p>
-									<p id="rounded-display" class="count4 disease-margin"> Disease4 </p>
-									<p id="rounded-display" class="count3 disease-margin"> Disease5 </p>
-									<p id="rounded-display" class="count3 disease-margin"> Disease6 </p>
-									<p id="rounded-display" class="count3 disease-margin"> Disease7 </p>
-									<p id="rounded-display" class="count3 disease-margin"> Disease8 </p>
-									<p id="rounded-display" class="count2 disease-margin"> Disease9 </p>
-									<p id="rounded-display" class="count2 disease-margin"> Disease10 </p>
-									<p id="rounded-display" class="count2 disease-margin"> Disease11 </p>
-									<p id="rounded-display" class="count1 disease-margin"> Disease12 </p>
-									<p id="rounded-display" class="count1 disease-margin"> Disease13 </p>
-									<p id="rounded-display" class="count1 disease-margin"> Disease14 </p>
-
 								</div>
 
 							</article>
@@ -127,17 +118,19 @@
 					<section id="sidebar">
 
 						<!-- Dropdown -->
+						
 							<section>
 								<div class="mini-posts">
-
-										<article class="mini-post med-bottom-margin">
-											<button id="rounded-display2"> Submit </button>
+									
+									<article class="mini-post med-bottom-margin">
+										{% if show %}
+										<form action="{% url 'result' %}">
+											{% csrf_token %}
 											<hr class="custom-margin small-margin-bottom">
-
 											<div class="least-rt-lt-margin max-height-set">
 												<span class="flex-display">		
-													<select class="selectpicker show-tick option-width" multiple data-live-search="true" data-max-options="10" multiple title="Choose (Max 10)" data-width="auto">
-														{% for data in object_list %}
+													<select name="services" class="selectpicker show-tick option-width" multiple data-live-search="true" data-max-options="10" multiple title="Choose (Max 10)" data-width="auto">
+														{% for data in result %}
 															<option class="option-width option-color">
 																{{data.Symptom}}
 															</option>
@@ -145,17 +138,20 @@
 												  	</select> 
 												</span>
 											</div>
-											
+											<button id="rounded-display2"> Submit </button>
+											</form>
 											<hr class="custom-margin small-margin-bottom">
-
 											<header>
 												<div class="title">
 													<h3 class="small-margin-top"> Select symptoms </h3>
 												</div>
 											</header>
-											
+											{% endif %}
+											{% if back %}
+											<a href="{% url 'home' %}">Go Back</a>
+											{% endif %}
 										</article>
-
+										
 										<article class="mini-post med-bottom-margin">
 											<div class="arrange-diseases small-margin-bottom small-left-margin">	
 												<div class="medium-right-margin">
@@ -195,7 +191,6 @@
 
 									</div>
 							</section>
-
 					</section>
 
 			</div>
