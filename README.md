@@ -34,7 +34,7 @@ Do the following installations only after the virtual environment is activated
 6. To stop, use Ctrl+C
 7. http://localhost:8000 to view the UI up & running
 
-## About files in "StartApp" folder
+## About files in "djangoApp" folder
 1. urls.py: Provides the mapping of our apps urls to their respective python views(methods).
 2. views.py: Provides the mapping of the logic behind every screen of the application. This is mapped from the urls.py      folder.
 3. models.py: Provides the mapping to our SQL database.
