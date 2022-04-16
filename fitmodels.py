@@ -1,9 +1,16 @@
+# Import all necessary packages
+import os
 import warnings
-warnings.filterwarnings("ignore")
 import pandas as pd
+warnings.filterwarnings("ignore")
+
+# Get file path
+current_directory = os.getcwd()
+data_path = current_directory + "/Datasets-CSV"
+
 # Load datasets for all possible combinations & for individual disease's respective symptoms
-df_combination = pd.read_csv("./Disease_Symptom_Dataset_For_All_Symptom_Subsets.csv") 
-df_independent = pd.read_csv("./Disease_Symptom_Dataset_For_Respective_Symptoms.csv") 
+df_combination = pd.read_csv(data_path + "/Disease_Symptom_Dataset_For_All_Symptom_Subsets.csv") 
+df_independent = pd.read_csv(data_path + "/Disease_Symptom_Dataset_For_Respective_Symptoms.csv") 
 
 X_combination = df_combination.iloc[:, 1:]
 Y_combination = df_combination.iloc[:, 0:1]
@@ -20,44 +27,11 @@ all_diseases.sort()
 no_of_diseases = 10
 
 # Function to display the results from the dictionary
-def PrintResults(top10_sorted_dict):
+def PrintDictionary(top10_sorted_dict):
     for (key, value) in top10_sorted_dict.items():
         print(key, "\t", value, "%")
 
-
-# Function to print list contents
-def printList(list_data):
-    for item in list_data:
-        print(item)
-
-def ProcessResultAndGenerateDiseases(top10_list):
-    
-    global df_independent, all_symptoms, all_diseases, processed_symptoms
-    top10_diseases = []
-    #top10_dict = {}
-
-    # Checks for each disease, the matched symptoms & generates probability of having that disease
-    for (idx, disease_id) in enumerate(top10_list):
-        matched_symptoms = set()
-        top10 = df_independent.loc[df_independent['Disease_Name'] == all_diseases[disease_id]].values.tolist()
         
-        # Obtains the disease name which is at the top of the dataframe
-        disease = top10[0].pop(0)
-
-        # Each row contains 0s & 1s indicating whether a disease is associated with a particular symptom or not
-        for (idx, value) in enumerate(top10[0]):
-            if value != 0:
-                matched_symptoms.add(all_symptoms[idx])
-                
-        #probability = (len(matched_symptoms.intersection(set(processed_symptoms))) + 1) / (len(set(processed_symptoms)) + 1)
-        #top10_dict[disease] = round(probability * mean_score * 100, 2)
-        top10_diseases.append(disease)
-    
-    #top10_sorted = dict(sorted(top10_dict.items(), key=lambda kv: kv[1], reverse=True))
-    return sorted(top10_diseases)    #top10_sorted
-# Function to find co-occuring symptoms with all the symptoms user chosen
-# We use a threshold to check for a 80% match with the given symptoms
-
 def FindCooccuringSymptomsWithThreshold(user_symptoms):
     
     global df_independent, all_symptoms
@@ -104,4 +78,28 @@ def FindCooccuringSymptomsWithThreshold(user_symptoms):
     cooccuring_symptoms = sorted(list(cooccuring_symptoms))
     return cooccuring_symptoms
 
+# Function to generate top 10 diseases from the ML results
+# Pass mean_score as another argument if you need probabilities too
+def ProcessResultAndGenerateDiseases(top10_list, mean_score, cooccuring_symptoms, user_symptoms_len):
+    
+    global df_independent, all_symptoms, all_diseases
+    top10_dict = {}
 
+    # Checks for each disease, the matched symptoms & generates probability of having that disease
+    for (idx, disease_id) in enumerate(top10_list):
+        matched_symptoms = set()
+        top10 = df_independent.loc[df_independent['Disease_Name'] == all_diseases[disease_id]].values.tolist()
+        
+        # Obtains the disease name which is at the top of the dataframe
+        disease = top10[0].pop(0)
+
+        # Each row contains 0s & 1s indicating whether a disease is associated with a particular symptom or not
+        for (idx, value) in enumerate(top10[0]):
+            if value != 0:
+                matched_symptoms.add(all_symptoms[idx])
+                
+        probability = (len(matched_symptoms.intersection(set(cooccuring_symptoms))) + 1) / (user_symptoms_len + 1)
+        top10_dict[disease] = round(probability * mean_score * 100, 2)
+    
+    top10_sorted_dict = dict(sorted(top10_dict.items(), key=lambda kv: kv[1], reverse=True))
+    return top10_sorted_dict  
