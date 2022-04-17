@@ -119,7 +119,7 @@ def result(request):
     print("100% ", prob_100, "\t75% ", prob_75, "\t50% ", prob_50, "\t25% ", prob_25, "\n")
 
     # Sort dictionary by probabilities & leave off the less possible ones
-    final_dict = dict(sorted(processed_dict.items(), key=lambda item: item[1], reverse=True)[:15])
+    final_dict = dict(sorted(processed_dict.items(), key=lambda item: item[1], reverse=True)[:10])
     #PrintDictionary(final_dict)
 
     # Set count values by range
