@@ -12,7 +12,7 @@ import joblib
 #     template_name = "index.html"
 def get_queryset(request):
     result = Diseases_Symptoms.objects.all()
-    result = result.distinct().order_by()
+    result = result.values('Symptom').distinct().order_by('Symptom')
     print("data", type(result))
     return render(request, "index.html", {'result':result, 'disable': False, 'show': True, 'back': False})
 
