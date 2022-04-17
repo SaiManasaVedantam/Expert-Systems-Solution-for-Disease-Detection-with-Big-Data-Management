@@ -18,66 +18,52 @@ def result(request):
     user_symptoms_len = len(set(user_symptoms))
     print("user_symptoms", user_symptoms)
     
+    # Get possible subsets with minimum 80% count
+    processed_symptoms = GetPossibleSubsets(user_symptoms)
+
     # Obtains all possible cooccuring symptoms including given symptoms
     cooccuring_symptoms = FindCooccuringSymptomsWithThreshold(user_symptoms)
+    processed_symptoms2 = [0 for x in range(0, len(all_symptoms))]
+    for symptom in cooccuring_symptoms:
+        processed_symptoms2[all_symptoms.index(symptom)] = 1
+
+    processed_symptoms.append(processed_symptoms2)
+    #print(processed_symptoms)
     
-    # print(cooccuring_symptoms)
     no_of_diseases = 10
     
     # Get file path for SAV files
     current_directory = os.getcwd()
     sav_path = current_directory + "/Model-Weights/"
     
-    # Process obtained symptoms to create rows compatible with the dataset
-    processed_symptoms = [0 for x in range(0, len(all_symptoms))]
-    for symptom in cooccuring_symptoms:
-        processed_symptoms[all_symptoms.index(symptom)] = 1
-    
-    # Logistic Regression result
-    print("---------- LOGISTIC REGRESSION: ----------\n")
-    
+    print("Processing with Logistic Regression...")
     lr_cls = joblib.load(sav_path + "log_reg.sav")
     lr_mean_score = joblib.load(sav_path + "log_reg_cv.sav")
-    lr_result = lr_cls.predict_proba([processed_symptoms])
-    
-    lr_top10 = lr_result[0].argsort()[-no_of_diseases:][::-1]
-    lr_dict = ProcessResultAndGenerateDiseases(lr_top10, lr_mean_score, cooccuring_symptoms, user_symptoms_len)
+    lr_dict = GetTop10BySubsets(lr_cls, lr_mean_score, user_symptoms, processed_symptoms)
+    print("Done\n")
     PrintDictionary(lr_dict)
-    
-    # Knn Result
-    print("\n---------- KNN CLASSIFIER: ----------\n")
 
-    knn_cls = joblib.load(sav_path + "knn.sav")
-    knn_mean_score = joblib.load(sav_path + "knn_cv.sav")
-    knn_result = knn_cls.predict_proba([processed_symptoms])
-    
-    knn_top10 = knn_result[0].argsort()[-no_of_diseases:][::-1]
-    knn_dict = ProcessResultAndGenerateDiseases(knn_top10, knn_mean_score, cooccuring_symptoms, user_symptoms_len)
-    PrintDictionary(knn_dict)
-
-    # Multinomial Naive bayes Result
-    print("\n---------- MULTINOMIAL NAIVE BAYES: ----------\n")
-
-    mnb_cls = joblib.load(sav_path + "mnb.sav")
-    mnb_mean_score = joblib.load(sav_path + "mnb_cv.sav")
-    mnb_result = mnb_cls.predict_proba([processed_symptoms])
-    
-    mnb_top10 = mnb_result[0].argsort()[-no_of_diseases:][::-1]
-    mnb_dict = ProcessResultAndGenerateDiseases(mnb_top10, mnb_mean_score, cooccuring_symptoms, user_symptoms_len)
-    PrintDictionary(mnb_dict)
-
-    # Random Forest result
-    print("\n---------- RANDOM FOREST: ----------\n")
-
+    print("Processing with Random Forest Classifier...")
     rf_cls = joblib.load(sav_path + "rand_forest.sav")
     rf_mean_score = joblib.load(sav_path + "rand_forest_cv.sav")
-    rf_result = rf_cls.predict_proba([processed_symptoms])
-    
-    rf_top10 = rf_result[0].argsort()[-no_of_diseases:][::-1]
-    rf_dict = ProcessResultAndGenerateDiseases(rf_top10, rf_mean_score, cooccuring_symptoms, user_symptoms_len)
+    rf_dict = GetTop10BySubsets(rf_cls, rf_mean_score, user_symptoms, processed_symptoms)
+    print("Done\n")
     PrintDictionary(rf_dict)
-    
-    
+
+    print("Processing with KNN Classifier...")
+    knn_cls = joblib.load(sav_path + "knn.sav")
+    knn_mean_score = joblib.load(sav_path + "knn_cv.sav")
+    knn_dict = GetTop10BySubsets(knn_cls, knn_mean_score, user_symptoms, processed_symptoms)
+    print("Done\n")
+    PrintDictionary(knn_dict)
+
+    print("Processing with Multinomial Naive Bayes...")
+    mnb_cls = joblib.load(sav_path + "mnb.sav")
+    mnb_mean_score = joblib.load(sav_path + "mnb_cv.sav")
+    mnb_dict = GetTop10BySubsets(mnb_cls, mnb_mean_score, user_symptoms, processed_symptoms)
+    print("Done\n")
+    PrintDictionary(mnb_dict)
+
     # We use joint probabilities for the final dictionary & probabilities
     final_dict = {}
     
@@ -149,6 +135,9 @@ def result(request):
             count = 1
         final_dict[key] = "count" + str(count)
         print(key, ":\t", final_dict[key])
-
+        
+    # Sort diseases by count labels & then by their names
+    #final_dict = dict(sorted(final_dict.items(), key=lambda x: (x[1],x[0]), reverse=False))
+    
     # Pass the final_dict to the UI
     return render(request, "index.html", {"final_dict": final_dict, 'disable': True, 'show': False, 'back': True})
