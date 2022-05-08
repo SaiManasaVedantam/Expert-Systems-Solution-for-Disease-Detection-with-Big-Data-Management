@@ -30,15 +30,35 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-.busy{
+.fixed-width {
+	width: 50em !IMPORTANT;
+}
+
+.busy, .back{
 	font-size: 15px;
 	font-family: "Raleway", Helvetica, sans-serif;
 	text-transform: uppercase;
-	letter-spacing: 0.25em;
+	letter-spacing: 0.15em;
+	font-weight: 700;
+	color: #3c3b3b;
+	margin-left: 0.5em;
+
 }
 
 .max-height-set {
 	height: 15em;
+}
+
+.medium-left-margin {
+	margin-left: 1em !IMPORTANT;
+}
+
+.letter-spacing-custom {
+	letter-spacing: 0.15em !IMPORTANT;
+}
+
+.med-margin-top {
+	margin-top: 0.5em;
 }
 
 .bootstrap-select .btn {
