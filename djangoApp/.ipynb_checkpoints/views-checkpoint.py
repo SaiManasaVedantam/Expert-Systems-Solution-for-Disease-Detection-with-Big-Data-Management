@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView,ListView
+from collections import Counter
+import matplotlib.pyplot as plt
 from djangoApp.models import *
 from fitmodels import *
 import joblib
@@ -8,7 +10,7 @@ import os
 
 def get_queryset(request):
     result = Diseases_Symptoms.objects.all()
-    result = result.distinct().order_by()
+    result = result.values('Symptom').distinct().order_by('Symptom')
     print("data", type(result))
     return render(request, "index.html", {'result':result, 'disable': False, 'show': True, 'back': False})
 
@@ -119,7 +121,7 @@ def result(request):
     print("100% ", prob_100, "\t75% ", prob_75, "\t50% ", prob_50, "\t25% ", prob_25, "\n")
 
     # Sort dictionary by probabilities & leave off the less possible ones
-    final_dict = dict(sorted(processed_dict.items(), key=lambda item: item[1], reverse=True)[:15])
+    final_dict = dict(sorted(processed_dict.items(), key=lambda item: item[1], reverse=True)[:10])
     #PrintDictionary(final_dict)
 
     # Set count values by range
@@ -136,8 +138,42 @@ def result(request):
         final_dict[key] = "count" + str(count)
         print(key, ":\t", final_dict[key])
         
-    # Sort diseases by count labels & then by their names
-    #final_dict = dict(sorted(final_dict.items(), key=lambda x: (x[1],x[0]), reverse=False))
+    # Generating graph for UI
+    dict_values = list(final_dict.values())
+    counter_dict = dict(Counter(dict_values))
+
+    # Get respective counts for each count label
+    count_labels_and_counts = []
+    count_labels_and_counts.append(counter_dict['count1'])
+    count_labels_and_counts.append(counter_dict['count2'])
+    count_labels_and_counts.append(counter_dict['count3'])
+    count_labels_and_counts.append(counter_dict['count4'])
+
+    # Creates a bar chart
+    # Set figure settings
+    fig = plt.figure(figsize=(10,4))
+    ax = fig.add_subplot()
+
+    # Set X and Y axes
+    x_labels = ["1-25% Likely", "26-50% Likely", "51-75% Likely", "76-100% Likely"]
+    ax.set_xticklabels(x_labels, fontsize=12)
+    ax.set_xticks = [1, 2, 3, 4]
+    ax.set_yticks = [2, 4, 6, 8, 10]
+    plt.ylim(0, 10)
+
+    # Set X and Y labels
+    plt.xlabel("\nLevel of Severity", fontsize=16)
+    plt.ylabel("Counts", fontsize=16)
+
+    # Generate chart & set bar colors as per count
+    bar_chart = plt.bar(x_labels, count_labels_and_counts)
+    bar_chart[0].set_color('#f8d1c8') 
+    bar_chart[1].set_color('#faa18c')
+    bar_chart[2].set_color('#f17f66')
+    bar_chart[3].set_color('#ff7051')
+
+    # Save the plot to render in the UI
+    plt.savefig("./djangoApp/static/UI-Plots/plot.jpg")
     
     # Pass the final_dict to the UI
     return render(request, "index.html", {"final_dict": final_dict, 'disable': True, 'show': False, 'back': True})
