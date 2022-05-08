@@ -7,12 +7,24 @@ from djangoApp.models import *
 from fitmodels import *
 import joblib
 import os
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
+res_count = []
 def get_queryset(request):
+    res_count = []
+    x_labels = ["76-100% Likely", "51-75% Likely","26-50% Likely","1-25% Likely"]
+    chartLabel = "my data"
+    data ={
+                     "labels":x_labels,
+                     "chartLabel":chartLabel,
+                     "chartdata":res_count,
+             }
+    print(res_count)
     result = Diseases_Symptoms.objects.all()
     result = result.values('Symptom').distinct().order_by('Symptom')
     print("data", type(result))
-    return render(request, "index.html", {'result':result, 'disable': False, 'show': True, 'back': False})
+    return render(request, "index.html", {'result':result, 'disable': False, 'show': True, 'back': False,'data':data})
 
 def result(request):
     #user_list = request.POST.getlist("sevices")
@@ -124,56 +136,100 @@ def result(request):
     final_dict = dict(sorted(processed_dict.items(), key=lambda item: item[1], reverse=True)[:10])
     #PrintDictionary(final_dict)
 
+    # count for UI
+    count_labels_and_counts = {"1-25% Likely":0, "26-50% Likely":0, "51-75% Likely":0, "76-100% Likely":0}
+
     # Set count values by range
     for key in final_dict.keys():
         prob, count = final_dict[key], 0
         if prob <= prob_100 and prob > prob_75:
             count = 4
+            count_labels_and_counts["76-100% Likely"] += 1
         elif prob <= prob_75 and prob > prob_50:
             count = 3
+            count_labels_and_counts["51-75% Likely"] += 1
         elif prob <= prob_50 and prob > prob_25:
             count = 2
+            count_labels_and_counts["26-50% Likely"] += 1
         else:
             count = 1
+            count_labels_and_counts["1-25% Likely"] += 1
         final_dict[key] = "count" + str(count)
-        print(key, ":\t", final_dict[key])
+        # print(key, ":\t", final_dict[key])
         
     # Generating graph for UI
     dict_values = list(final_dict.values())
     counter_dict = dict(Counter(dict_values))
+    print(counter_dict)
+    
+    
+    # final count for UI
+    res_count.append(count_labels_and_counts.get("76-100% Likely",0))
+    res_count.append(count_labels_and_counts.get("51-75% Likely",0))
+    res_count.append(count_labels_and_counts.get("26-50% Likely",0))
+    res_count.append(count_labels_and_counts.get("1-25% Likely",0))
+    
+    
+    
+    
 
-    # Get respective counts for each count label
-    count_labels_and_counts = []
-    count_labels_and_counts.append(counter_dict['count1'])
-    count_labels_and_counts.append(counter_dict['count2'])
-    count_labels_and_counts.append(counter_dict['count3'])
-    count_labels_and_counts.append(counter_dict['count4'])
 
-    # Creates a bar chart
-    # Set figure settings
-    fig = plt.figure(figsize=(10,4))
-    ax = fig.add_subplot()
+    
+    # # Get respective counts for each count label
+    # count_labels_and_counts = []
+    # count_labels_and_counts.append(counter_dict['count1'])
+    # count_labels_and_counts.append(counter_dict['count2'])
+    # count_labels_and_counts.append(counter_dict['count3'])
+    # count_labels_and_counts.append(counter_dict['count4'])
+
+    # # Creates a bar chart
+    # # Set figure settings
+    # fig = plt.figure(figsize=(10,4))
+    # ax = fig.add_subplot()
 
     # Set X and Y axes
-    x_labels = ["1-25% Likely", "26-50% Likely", "51-75% Likely", "76-100% Likely"]
-    ax.set_xticklabels(x_labels, fontsize=12)
-    ax.set_xticks = [1, 2, 3, 4]
-    ax.set_yticks = [2, 4, 6, 8, 10]
-    plt.ylim(0, 10)
+    # x_labels = ["1-25% Likely", "26-50% Likely", "51-75% Likely", "76-100% Likely"]
+    # ax.set_xticklabels(x_labels, fontsize=12)
+    # ax.set_xticks = [1, 2, 3, 4]
+    # ax.set_yticks = [2, 4, 6, 8, 10]
+    # plt.ylim(0, 10)
 
-    # Set X and Y labels
-    plt.xlabel("\nLevel of Severity", fontsize=16)
-    plt.ylabel("Counts", fontsize=16)
+    # # Set X and Y labels
+    # plt.xlabel("\nLevel of Severity", fontsize=16)
+    # plt.ylabel("Counts", fontsize=16)
 
     # Generate chart & set bar colors as per count
-    bar_chart = plt.bar(x_labels, count_labels_and_counts)
-    bar_chart[0].set_color('#f8d1c8') 
-    bar_chart[1].set_color('#faa18c')
-    bar_chart[2].set_color('#f17f66')
-    bar_chart[3].set_color('#ff7051')
+    # bar_chart = plt.bar(x_labels, count_labels_and_counts)
+    # bar_chart[0].set_color('#f8d1c8') 
+    # bar_chart[1].set_color('#faa18c')
+    # bar_chart[2].set_color('#f17f66')
+    # bar_chart[3].set_color('#ff7051')
 
-    # Save the plot to render in the UI
-    plt.savefig("./djangoApp/static/UI-Plots/plot.jpg")
-    
+    # # Save the plot to render in the UI
+    # plt.savefig("./djangoApp/static/UI-Plots/plot.jpg")
+    x_labels = ["76-100% Likely", "51-75% Likely","26-50% Likely","1-25% Likely"]
+    chartLabel = "count"
+    data ={
+                     "labels":x_labels,
+                     "chartLabel":chartLabel,
+                     "chartdata":res_count,
+             }
     # Pass the final_dict to the UI
-    return render(request, "index.html", {"final_dict": final_dict, 'disable': True, 'show': False, 'back': True})
+    print(res_count)
+    return render(request, "index.html", {"final_dict": final_dict, 'disable': True, 'show': False, 'back': True, 'data':data})
+
+
+
+class ChartData(APIView):
+    authentication_classes = []
+    permission_classes = []
+   
+    def get(self, request, format = None):
+        x_labels = ["76-100% Likely", "51-75% Likely","26-50% Likely","1-25% Likely"]
+        chartLabel = "count"
+        data ={
+                     "labels":x_labels,
+                     "chartLabel":chartLabel,
+                     "chartdata":res_count,
+             }
+        return Response(data)
