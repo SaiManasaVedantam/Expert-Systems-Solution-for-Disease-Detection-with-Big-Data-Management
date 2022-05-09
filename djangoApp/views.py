@@ -12,9 +12,9 @@ from rest_framework.response import Response
 
 res_count = []
 def get_queryset(request):
-    res_count = []
+    res_count.clear()
     x_labels = ["76-100% Likely", "51-75% Likely","26-50% Likely","1-25% Likely"]
-    chartLabel = "my data"
+    chartLabel = "count"
     data ={
                      "labels":x_labels,
                      "chartLabel":chartLabel,
@@ -135,7 +135,7 @@ def result(request):
     # Sort dictionary by probabilities & leave off the less possible ones
     final_dict = dict(sorted(processed_dict.items(), key=lambda item: item[1], reverse=True)[:10])
     #PrintDictionary(final_dict)
-
+    print(final_dict)
     # count for UI
     count_labels_and_counts = {"1-25% Likely":0, "26-50% Likely":0, "51-75% Likely":0, "76-100% Likely":0}
 
@@ -156,57 +156,13 @@ def result(request):
             count_labels_and_counts["1-25% Likely"] += 1
         final_dict[key] = "count" + str(count)
         # print(key, ":\t", final_dict[key])
-        
-    # Generating graph for UI
-    dict_values = list(final_dict.values())
-    counter_dict = dict(Counter(dict_values))
-    print(counter_dict)
-    
     
     # final count for UI
     res_count.append(count_labels_and_counts.get("76-100% Likely",0))
     res_count.append(count_labels_and_counts.get("51-75% Likely",0))
     res_count.append(count_labels_and_counts.get("26-50% Likely",0))
     res_count.append(count_labels_and_counts.get("1-25% Likely",0))
-    
-    
-    
-    
-
-
-    
-    # # Get respective counts for each count label
-    # count_labels_and_counts = []
-    # count_labels_and_counts.append(counter_dict['count1'])
-    # count_labels_and_counts.append(counter_dict['count2'])
-    # count_labels_and_counts.append(counter_dict['count3'])
-    # count_labels_and_counts.append(counter_dict['count4'])
-
-    # # Creates a bar chart
-    # # Set figure settings
-    # fig = plt.figure(figsize=(10,4))
-    # ax = fig.add_subplot()
-
-    # Set X and Y axes
-    # x_labels = ["1-25% Likely", "26-50% Likely", "51-75% Likely", "76-100% Likely"]
-    # ax.set_xticklabels(x_labels, fontsize=12)
-    # ax.set_xticks = [1, 2, 3, 4]
-    # ax.set_yticks = [2, 4, 6, 8, 10]
-    # plt.ylim(0, 10)
-
-    # # Set X and Y labels
-    # plt.xlabel("\nLevel of Severity", fontsize=16)
-    # plt.ylabel("Counts", fontsize=16)
-
-    # Generate chart & set bar colors as per count
-    # bar_chart = plt.bar(x_labels, count_labels_and_counts)
-    # bar_chart[0].set_color('#f8d1c8') 
-    # bar_chart[1].set_color('#faa18c')
-    # bar_chart[2].set_color('#f17f66')
-    # bar_chart[3].set_color('#ff7051')
-
-    # # Save the plot to render in the UI
-    # plt.savefig("./djangoApp/static/UI-Plots/plot.jpg")
+   
     x_labels = ["76-100% Likely", "51-75% Likely","26-50% Likely","1-25% Likely"]
     chartLabel = "count"
     data ={
