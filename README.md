@@ -49,9 +49,9 @@ Do the following installations only after the virtual environment is activated
 
 ## Architecture
 <p>
-<img width="333" alt="Screen Shot 2022-05-17 at 4 13 03 PM" src="https://user-images.githubusercontent.com/28973352/168911048-77854141-2097-4d2b-bf22-a814aa22b68b.png"> 
-<img width="333" alt="Screen Shot 2022-05-17 at 4 09 28 PM" src="https://user-images.githubusercontent.com/28973352/168910669-e07657c6-6cc7-4f7a-ab64-4a34b12bee43.png">
-<img width="333" alt="Screen Shot 2022-05-17 at 4 09 41 PM" src="https://user-images.githubusercontent.com/28973352/168910680-4c204b75-c417-4b64-b6e4-2e35e7f2b3d0.png">
+<img width="550" alt="Screen Shot 2022-05-17 at 4 13 03 PM" src="https://user-images.githubusercontent.com/28973352/168911048-77854141-2097-4d2b-bf22-a814aa22b68b.png"> 
+<img width="550" alt="Screen Shot 2022-05-17 at 4 09 28 PM" src="https://user-images.githubusercontent.com/28973352/168910669-e07657c6-6cc7-4f7a-ab64-4a34b12bee43.png">
+<img width="550" alt="Screen Shot 2022-05-17 at 4 09 41 PM" src="https://user-images.githubusercontent.com/28973352/168910680-4c204b75-c417-4b64-b6e4-2e35e7f2b3d0.png">
 </p>
 
 
