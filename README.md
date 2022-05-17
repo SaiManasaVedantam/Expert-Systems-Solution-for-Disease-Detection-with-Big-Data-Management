@@ -55,7 +55,7 @@ Do the following installations only after the virtual environment is activated
 </p>
 
 
-## UI Schreenshots
+## UI Screenshots
 <img width="639" alt="Screen Shot 2022-05-14 at 11 02 15 AM" src="https://user-images.githubusercontent.com/28973352/168439644-355a1367-dd28-43e3-8527-b2d2b903bfde.png">
 In the above, color coding helps to understand the level of severity associated with the disease. Darker the color, severe is the disease.
 
